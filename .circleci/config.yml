@@ -16,7 +16,7 @@ jobs:
           pkg-manager: yarn
       - run: yarn lint
 workflows:
-  test_my_app:
+  tests:
     jobs:
       - linter
       - cypress/run:
