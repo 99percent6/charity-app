@@ -2,8 +2,26 @@
 version: '2.1'
 orbs:
   node: circleci/node@4.6
+  cypress: cypress-io/cypress@1.29.0
+jobs:
+  linter:
+    executor:
+      name: node/default
+      tag: '12.18'
+    steps:
+      - checkout
+      - node/install:
+          install-yarn: true
+      - node/install-packages:
+          pkg-manager: yarn
+      - run: yarn lint
 workflows:
-  run-npm-command:
+  test_my_app:
     jobs:
-      - node/run:
-          yarn-run: lint
+      - linter
+      - cypress/run:
+          config: 'baseUrl=http://localhost:5000'
+          install-command: yarn install --frozen-lockfile
+          build: yarn build
+          start: yarn start
+          wait-on: 'http://localhost:5000'
