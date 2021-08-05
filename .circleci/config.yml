@@ -4,8 +4,9 @@ orbs:
   node: circleci/node@4.6
 jobs:
   linter:
-    docker:
-      - image: 'cimg/base:stable'
+    executor:
+      name: node/default
+      tag: '12.18'
     steps:
       - checkout
       - node/install:
