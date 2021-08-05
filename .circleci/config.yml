@@ -3,7 +3,9 @@ version: '2.1'
 orbs:
   node: circleci/node@4.6
 jobs:
-  install-node-example:
+  linter:
+    docker:
+      - image: 'cimg/base:stable'
     steps:
       - checkout
       - node/install:
@@ -12,4 +14,4 @@ jobs:
 workflows:
   test_my_app:
     jobs:
-      - install-node-example
+      - linter
