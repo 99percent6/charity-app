@@ -23,3 +23,12 @@
 //
 // -- This is will overwrite an existing command --
 // Cypress.Commands.overwrite("visit", (originalFn, url, options) => { ... })
+
+Cypress.Commands.add('createOrganization', (orgName) => {
+  cy.visit('/');
+  cy.get('#create-org-button').click();
+  cy.get('#create-org-input').type(orgName);
+  cy.get('#create-org-button-modal').click();
+  cy.wait(1000);
+  cy.get('li').contains(orgName);
+})
