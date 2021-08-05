@@ -23,4 +23,4 @@ workflows:
           install-command: yarn install --frozen-lockfile
           build: yarn build
           start: yarn start
-          wait-on: 'http://localhost:4200'
+          wait-on: 'http://localhost:5000'
