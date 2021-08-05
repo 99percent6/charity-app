@@ -2,8 +2,14 @@
 version: '2.1'
 orbs:
   node: circleci/node@4.6
+jobs:
+  install-node-example:
+    steps:
+      - checkout
+      - node/install:
+          install-yarn: true
+      - run: yarn lint
 workflows:
-  run-npm-command:
+  test_my_app:
     jobs:
-      - node/run:
-          yarn-run: lint
+      - install-node-example
