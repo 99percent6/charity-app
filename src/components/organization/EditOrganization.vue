@@ -30,7 +30,7 @@
           id="edit-org-button-modal"
           type="primary"
           size="big"
-          icon="add_circle"
+          icon="edit"
           class="col-xs-4"
           @click="editOrganization"
         >
