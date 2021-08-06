@@ -41,6 +41,5 @@ workflows:
           start: yarn start
           wait-on: 'http://localhost:5000'
       - deploy:
-          type: approval
           requires:
             - cypress/run
