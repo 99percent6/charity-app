@@ -39,8 +39,6 @@ workflows:
           filters:
             branches:
               ignore: main
-          requires:
-            - linter
           config: 'baseUrl=http://localhost:5000'
           install-command: yarn install --frozen-lockfile
           build: yarn build
