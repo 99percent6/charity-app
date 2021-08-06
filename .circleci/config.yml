@@ -21,6 +21,10 @@ jobs:
       tag: '12.18'
     steps:
       - checkout
+      - node/install:
+          install-yarn: true
+      - node/install-packages:
+          pkg-manager: yarn
       - run: yarn deploy
 workflows:
   tests:
