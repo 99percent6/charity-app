@@ -31,9 +31,13 @@ workflows:
     jobs:
       - linter
       - cypress/run:
+          requires:
+            - linter
           config: 'baseUrl=http://localhost:5000'
           install-command: yarn install --frozen-lockfile
           build: yarn build
           start: yarn start
           wait-on: 'http://localhost:5000'
-      - deploy
+      - deploy:
+          requires:
+            - cypress/run
