@@ -54,8 +54,6 @@ workflows:
               only:
                 - main
           type: approval
-          requires:
-            - tests
       - deploy:
           filters:
             branches:
