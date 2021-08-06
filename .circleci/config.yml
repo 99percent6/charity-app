@@ -11,17 +11,47 @@ jobs:
     steps:
       - checkout
       - node/install:
+          install-npm: false
           install-yarn: true
       - node/install-packages:
           pkg-manager: yarn
       - run: yarn lint
+  deploy:
+    executor:
+      name: node/default
+      tag: '12.18'
+    steps:
+      - checkout
+      - node/install:
+          install-npm: false
+          install-yarn: true
+      - node/install-packages:
+          pkg-manager: yarn
+      - run: yarn deploy
 workflows:
-  test_my_app:
+  tests:
     jobs:
       - linter
       - cypress/run:
+          requires:
+            - linter
           config: 'baseUrl=http://localhost:5000'
           install-command: yarn install --frozen-lockfile
           build: yarn build
           start: yarn start
           wait-on: 'http://localhost:5000'
+      - hold:
+          filters:
+            branches:
+              only:
+                - main
+          type: approval
+          requires:
+            - cypress/run
+      - deploy:
+          filters:
+            branches:
+              only:
+                - main
+          requires:
+            - hold

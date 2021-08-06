@@ -7,9 +7,11 @@
     "build": "vue-cli-service build",
     "start": "serve -s dist",
     "test:e2e": "vue-cli-service test:e2e",
-    "lint": "vue-cli-service lint"
+    "lint": "vue-cli-service lint",
+    "deploy": "node scripts/deploy.js"
   },
   "dependencies": {
+    "axios": "^0.21.1",
     "core-js": "^3.6.5",
     "equal-vue": "^0.79.1",
     "flexboxgrid2": "^7.2.1",
