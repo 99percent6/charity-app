@@ -29,10 +29,16 @@ jobs:
           pkg-manager: yarn
       - run: yarn deploy
 workflows:
-  tests:
+  test_and_deploy:
     jobs:
-      - linter
+      - linter:
+          filters:
+            branches:
+              ignore: main
       - cypress/run:
+          filters:
+            branches:
+              ignore: main
           requires:
             - linter
           config: 'baseUrl=http://localhost:5000'
@@ -40,14 +46,14 @@ workflows:
           build: yarn build
           start: yarn start
           wait-on: 'http://localhost:5000'
-  deploy:
-    jobs:
       - hold:
           filters:
             branches:
               only:
                 - main
           type: approval
+          requires:
+            - cypress/run
       - deploy:
           filters:
             branches:
